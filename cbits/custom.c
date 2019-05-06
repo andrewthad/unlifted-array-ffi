@@ -9,7 +9,8 @@ int get_size
   return res;
 }
 
-// Iterate over all the elements in an ArrayArray#. The elements
+// Iterate over all the ByteArray# elements in an ArrayArray#, folding
+// the first int in each ByteArray# into a sum. The elements
 // inside the ArrayArray# must be ByteArray# or MutableByteArray#,
 // both of which are represented by StgArrBytes.
 int sum_first

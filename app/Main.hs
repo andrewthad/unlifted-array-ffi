@@ -18,7 +18,7 @@ main = do
   sz <- getSize arr
   when (sz /= 3) (fail ("bad size " ++ show sz))
   n <- sumFirst arr
-  when (n /= 23 + 19 + 44) (fail ("Failure (" ++ show n ++ ")"))
+  when (n /= 23 + 19 + 44) (fail ("bad sum " ++ show n))
   putStrLn "Success"
 
 foreign import ccall unsafe "custom.h sum_first"
@@ -34,11 +34,14 @@ sumFirst :: UnliftedArray (PrimArray CInt) -> IO CInt
 sumFirst (UnliftedArray arr) = c_sum_first arr
 
 -- All elements in the tail of the array are assigned to be
--- the maximum value of CInt. 
+-- the maximum value of CInt. Since these elements are ultimately
+-- ignored, their value does not matter. The maximum CInt is
+-- chosen to make implementation errors in the C file more likely
+-- to manifest themselves in a clear way.
 newFilledPrimArray ::
      Int -- number of elements
   -> CInt -- value of head element
-  -> IO (PrimArray CInt)
+  -> IO (PrimArray CInt) -- returs frozen prim array
 newFilledPrimArray n h = do
   m <- newPrimArray n
   setPrimArray m 0 n (maxBound :: CInt)
