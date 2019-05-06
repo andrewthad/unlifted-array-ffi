@@ -1,0 +1,26 @@
+cabal-version: 2.2
+name: unlifted-array-ffi
+version: 0.1.0.0
+synopsis: Demonstration of how to use UnliftedArray with the FFI
+homepage: https://github.com/andrewthad/unlifted-array-ffi
+license: BSD-3-Clause
+license-file: LICENSE
+author: Andrew Martin
+maintainer: andrew.thaddeus@gmail.com
+copyright: 2019 Andrew Martin
+category: Data
+extra-source-files:
+  README.md
+  cbits/custom.c
+  cbits/custom.h
+
+executable unlifted-array-ffi
+  main-is: Main.hs
+  build-depends:
+      base >=4.12.0.0
+    , primitive >= 0.6.4
+  hs-source-dirs: app
+  default-language: Haskell2010
+  c-sources: cbits/custom.c
+  include-dirs: include
+  includes: custom.h
