@@ -23,7 +23,7 @@ int sum_first
   // In source haskell terminology, we are roughly going from
   // GHC.Exts.Any to ByteArray.
   StgArrBytes **bufs = (StgArrBytes**)bufsTmp;
-  StgWord res = 0;
+  int res = 0;
   int ix = ((int)(arr->ptrs)) - 1;
   for(;ix >= 0;ix--){
     res = res + ((int*)(bufs[ix]->payload))[0];
